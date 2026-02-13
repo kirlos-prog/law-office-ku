@@ -1,4 +1,5 @@
 import { auth, db } from './firebase-config.js';
+alert("Script.js Loaded");
 import {
     signInWithEmailAndPassword,
     onAuthStateChanged,
@@ -358,6 +359,9 @@ if (caseSearchForm) {
         const submitBtn = caseSearchForm.querySelector('button[type="submit"]');
         submitBtn.disabled = true;
 
+        const currentCaseResults = document.getElementById('caseResults');
+        const currentNoResults = document.getElementById('noResults');
+
         try {
             const q = query(
                 collection(db, "cases"),
@@ -382,25 +386,29 @@ if (caseSearchForm) {
                 document.getElementById('resHearingDate').textContent = data.hearingDate || '---';
                 document.getElementById('resNotes').textContent = data.notes || '---';
 
-                caseResults.style.display = 'block';
-                noResults.style.display = 'none';
+                if (currentCaseResults) currentCaseResults.style.display = 'block';
+                if (currentNoResults) currentNoResults.style.display = 'none';
 
                 // Scroll to result
-                caseResults.scrollIntoView({ behavior: 'smooth' });
+                if (currentCaseResults) currentCaseResults.scrollIntoView({ behavior: 'smooth' });
             } else {
-                caseResults.style.display = 'none';
-                noResults.style.display = 'block';
+                if (currentCaseResults) currentCaseResults.style.display = 'none';
+                if (currentNoResults) {
+                    // Logic confirm alert
+                    alert("Debug: No results found in Firestore");
 
-                // Add shake animation
-                noResults.classList.add('shake-error');
-                noResults.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    currentNoResults.style.display = 'block';
+                    // Add shake animation
+                    currentNoResults.classList.add('shake-error');
+                    currentNoResults.scrollIntoView({ behavior: 'smooth', block: 'center' });
 
-                // Remove class after animation to allow re-triggering
-                setTimeout(() => noResults.classList.remove('shake-error'), 1000);
+                    // Remove class after animation to allow re-triggering
+                    setTimeout(() => currentNoResults.classList.remove('shake-error'), 1000);
+                }
             }
         } catch (error) {
             console.error(error);
-            alert("حدث خطأ أثناء البحث");
+            alert("خطأ في البحث: " + error.message);
         } finally {
             submitBtn.disabled = false;
         }
