@@ -165,6 +165,10 @@
             animation: modalPopIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
+        [data-theme="dark"] .hero-title {
+            color: #ffffff !important;
+        }
+
         @keyframes modalPopIn {
             from {
                 opacity: 0;
@@ -186,7 +190,8 @@
             <a href="#" class="modern-logo">
                 <div class="modern-logo-icon">⚖️</div>
                 <div class="logo-text">
-                    <span>محمد غازي الجدعي</span>
+                    <span class="ar-text">محمد غازي الجدعي</span>
+                    <span class="en-text" style="display: none;">Mohammed Ghazi Al-Jad'i</span>
                 </div>
             </a>
 
@@ -428,7 +433,7 @@
                 <div class="stat-card animate-scale-in" style="animation-delay: 0.2s">
                     <div style="font-size: 5rem; margin-bottom: 1.5rem;">👨‍💼</div>
                     <h3 class="ar-text">أشرف توفيق</h3>
-                    <h3 class="en-text" style="display: none;">Ashraf Tawfiq</h3>
+                    <h3 class="en-text" style="display: none;">Ashraf Tawfik</h3>
                     <p class="ar-text">محامي</p>
                     <p class="en-text" style="display: none;">Lawyer</p>
                 </div>
@@ -516,7 +521,7 @@
                                     data-en="Mohammed Ghazi Al-Jad'i">محمد غازي الجدعي</option>
                                 <option value="hammam@aljadei-law.com" data-ar="حمام حكيم" data-en="Hammam Hakim">حمام
                                     حكيم</option>
-                                <option value="ashraf@aljadei-law.com" data-ar="أشرف توفيق" data-en="Ashraf Tawfiq">أشرف
+                                <option value="ashraf@aljadei-law.com" data-ar="أشرف توفيق" data-en="Ashraf Tawfik">أشرف
                                     توفيق</option>
                                 <option value="tamer@aljadei-law.com" data-ar="تامر" data-en="Tamer">تامر</option>
                                 <option value="joseph@aljadei-law.com" data-ar="جوزيف بطرس" data-en="Joseph Botros">
@@ -720,7 +725,10 @@
                 <!-- No Results Message -->
                 <div id="noResults" class="animate-fade-in"
                     style="display: none; text-align: center; color: #ef4444; margin-top: 2rem; font-weight: 600; padding: 1rem; border: 1px solid #ef4444; border-radius: 12px; background: rgba(239, 68, 68, 0.1);">
-                    ❌ عذراً، البيانات المدخلة غير صحيحة. يرجى التأكد من رقم القضية والرقم المدني وإعادة المحاولة.
+                    <span class="ar-text">❌ عذراً، البيانات المدخلة غير صحيحة. يرجى التأكد من رقم القضية والرقم المدني
+                        وإعادة المحاولة.</span>
+                    <span class="en-text" style="display: none;">❌ Sorry, the entered data is incorrect. Please check
+                        the case number and national ID and try again.</span>
                 </div>
             </div>
     </section>
@@ -729,10 +737,14 @@
     <section id="lawyer-portal" class="modern-services" style="background: var(--slate-900); padding: 100px 0;">
         <div class="modern-container">
             <div class="modern-section-header">
-                <div class="modern-section-badge" style="background: rgba(255,255,255,0.1); color: var(--gold-300);">🔐
-                    منطقة المحامين</div>
-                <h2 class="modern-section-title" style="color: white; -webkit-text-fill-color: initial;">بوابة إدارة
-                    القضايا</h2>
+                <div class="modern-section-badge" style="background: rgba(255,255,255,0.1); color: var(--gold-300);">
+                    <span class="ar-text">🔐 منطقة المحامين</span>
+                    <span class="en-text" style="display: none;">🔐 Lawyers Area</span>
+                </div>
+                <h2 class="modern-section-title" style="color: white; -webkit-text-fill-color: initial;">
+                    <span class="ar-text">بوابة إدارة القضايا</span>
+                    <span class="en-text" style="display: none;">Case Management Portal</span>
+                </h2>
             </div>
 
             <!-- Login Area -->
@@ -811,29 +823,36 @@
                 <div class="glass-card"
                     style="padding: 1.5rem; margin-bottom: 2rem; background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.1);">
                     <div class="modern-grid modern-grid-3" style="gap: 1rem;">
-                        <input type="text" id="filterSearch" placeholder="بحث باسم الموكل أو رقم القضية..."
+                        <input type="text" id="filterSearch" placeholder-ar="بحث باسم الموكل أو رقم القضية..."
+                            placeholder-en="Search by client name or case ID..."
                             style="background: rgba(0,0,0,0.3); border-color: rgba(255,255,255,0.2); color: white;">
 
                         <select id="filterStatus"
                             style="background: rgba(0,0,0,0.3); border-color: rgba(255,255,255,0.2); color: white;">
-                            <option value="">كافة الحالات</option>
-                            <option value="قيد المراجعة">قيد المراجعة</option>
-                            <option value="بانتظار المستندات">بانتظار المستندات</option>
-                            <option value="تم قيد الدعوى">تم قيد الدعوى</option>
-                            <option value="قيد المرافعة">قيد المرافعة</option>
-                            <option value="محجوزة للحكم">محجوزة للحكم</option>
-                            <option value="مكتمل">مكتمل</option>
+                            <option value="" data-ar="كافة الحالات" data-en="All Statuses">كافة الحالات</option>
+                            <option value="قيد المراجعة" data-ar="قيد المراجعة" data-en="Under Review">قيد المراجعة
+                            </option>
+                            <option value="بانتظار المستندات" data-ar="بانتظار المستندات" data-en="Awaiting Documents">
+                                بانتظار المستندات</option>
+                            <option value="تم قيد الدعوى" data-ar="تم قيد الدعوى" data-en="Case Registered">تم قيد
+                                الدعوى</option>
+                            <option value="قيد المرافعة" data-ar="قيد المرافعة" data-en="Under Litigation">قيد المرافعة
+                            </option>
+                            <option value="محجوزة للحكم" data-ar="محجوزة للحكم" data-en="Reserved for Judgment">محجوزة
+                                للحكم</option>
+                            <option value="مكتمل" data-ar="مكتمل" data-en="Completed">مكتمل</option>
                         </select>
 
                         <select id="filterCaseType"
                             style="background: rgba(0,0,0,0.3); border-color: rgba(255,255,255,0.2); color: white;">
-                            <option value="">كافة أنواع القضايا</option>
-                            <option value="مدني">مدني</option>
-                            <option value="أحوال شخصية">أحوال شخصية</option>
-                            <option value="تجاري">تجاري</option>
-                            <option value="جنائي">جنائي</option>
-                            <option value="عمالي">عمالي</option>
-                            <option value="قضاء إداري">قضاء إداري</option>
+                            <option value="" data-ar="كافة أنواع القضايا" data-en="All Case Types">كافة أنواع القضايا
+                            </option>
+                            <option value="مدني" data-ar="مدني" data-en="Civil">مدني</option>
+                            <option value="أحوال شخصية" data-ar="أحوال شخصية" data-en="Family Law">أحوال شخصية</option>
+                            <option value="تجاري" data-ar="تجاري" data-en="Commercial">تجاري</option>
+                            <option value="جنائي" data-ar="جنائي" data-en="Criminal">جنائي</option>
+                            <option value="عمالي" data-ar="عمالي" data-en="Labor">عمالي</option>
+                            <option value="قضاء إداري" data-ar="قضاء إداري" data-en="Administrative">قضاء إداري</option>
                         </select>
                     </div>
                 </div>
@@ -990,9 +1009,17 @@
         <div class="modern-container">
             <div class="modern-grid modern-grid-3">
                 <div>
-                    <h3 style="font-size: 1.8rem; margin-bottom: 1.5rem; color: var(--gold-400);">محمد غازي الجدعي</h3>
-                    <p style="color: var(--slate-400); line-height: 1.8;">نقدم خدمات قانونية متميزة تمزج بين الأصالة
-                        والحداثة، لتحقيق أفضل النتائج لموكلينا في كافة الأصعدة القانونية.</p>
+                    <h3 style="font-size: 1.8rem; margin-bottom: 1.5rem; color: var(--gold-400);">
+                        <span class="ar-text">محمد غازي الجدعي</span>
+                        <span class="en-text" style="display: none;">Mohammed Ghazi Al-Jad'i</span>
+                    </h3>
+                    <p style="color: var(--slate-400); line-height: 1.8;">
+                        <span class="ar-text">نقدم خدمات قانونية متميزة تمزج بين الأصالة والحداثة، لتحقيق أفضل النتائج
+                            لموكلينا في كافة الأصعدة القانونية.</span>
+                        <span class="en-text" style="display: none;">We provide distinguished legal services that blend
+                            heritage with modernity, to achieve the best results for our clients across all legal
+                            levels.</span>
+                    </p>
                 </div>
                 <div>
                     <h4 style="margin-bottom: 1.5rem; font-size: 1.2rem;">
@@ -1032,7 +1059,9 @@
             </div>
             <div
                 style="text-align: center; margin-top: 60px; padding-top: 30px; border-top: 1px solid var(--slate-800); color: var(--slate-500); font-size: 0.9rem;">
-                © 2026 مكتب محمد غازي الجدعي للمحاماة. جميع الحقوق محفوظة.
+                <span class="ar-text">© 2026 مكتب محمد غازي الجدعي للمحاماة. جميع الحقوق محفوظة.</span>
+                <span class="en-text" style="display: none;">© 2026 Mohammed Ghazi Al-Jad'i Law Office. All rights
+                    reserved.</span>
             </div>
         </div>
     </footer>
