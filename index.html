@@ -1,0 +1,969 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="مكتب محمد غازي الجدعي للمحاماة - خدمات قانونية متكاملة">
+    <title>مكتب محمد غازي الجدعي للمحاماة | Mohammed Ghazi Al-Jad'i Law Office</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="modern-v0-styles.css">
+    <link rel="stylesheet" href="modern-navbar.css">
+    <link rel="stylesheet" href="auth-styles.css">
+    <link rel="stylesheet" href="dashboard.css">
+
+    <style>
+        /* ========================================
+           Custom Layout Adjustments
+           ======================================== */
+
+        /* Hero Section */
+        .modern-hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 100px 2rem 60px;
+            position: relative;
+            background: radial-gradient(circle at 10% 10%, rgba(245, 158, 11, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 90% 90%, rgba(168, 85, 247, 0.05) 0%, transparent 40%);
+        }
+
+        .hero-title {
+            font-size: clamp(2.2rem, 6vw, 4.2rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            color: var(--slate-900);
+        }
+
+        .hero-title span.gradient-text {
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero-description {
+            font-size: clamp(1.1rem, 2vw, 1.3rem);
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            color: var(--slate-600);
+        }
+
+        /* Services Grid Refinement */
+        .modern-services {
+            padding: 80px 0;
+            background: var(--slate-50);
+        }
+
+        .service-card-modern {
+            background: white;
+            padding: 2.5rem 2rem;
+            border-radius: 24px;
+            border: 1px solid var(--slate-200);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .service-card-modern:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            border-color: var(--gold-400);
+        }
+
+        .service-icon-modern {
+            width: 70px;
+            height: 70px;
+            background: var(--gold-100);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            margin: 0 auto 1.5rem;
+            box-shadow: 0 8px 16px rgba(245, 158, 11, 0.15);
+        }
+
+        /* Form Styling */
+        .glass-card {
+            background: white;
+            border: 1px solid var(--slate-200);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--slate-800);
+            text-align: right;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border-radius: 12px;
+            border: 1px solid var(--slate-200);
+            background: var(--slate-50);
+            font-family: inherit;
+        }
+
+        /* Team Stats Styling */
+        .stat-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            border: 1px solid var(--slate-200);
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--gold-600);
+            margin-bottom: 0.5rem;
+        }
+
+        /* RTL Specifics */
+        [dir="rtl"] .hero-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+        }
+
+        /* Essential Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.85) !important;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            z-index: 10000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .modal-content {
+            position: relative;
+            z-index: 10001;
+            max-width: 100%;
+            animation: modalPopIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes modalPopIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8) translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="modern-navbar" id="navbar">
+        <div class="modern-navbar-container">
+            <a href="#" class="modern-logo">
+                <div class="modern-logo-icon">⚖️</div>
+                <div class="logo-text">
+                    <span>محمد غازي الجدعي</span>
+                </div>
+            </a>
+
+            <ul class="modern-nav-links" id="navLinks">
+                <li><a href="#home" class="modern-nav-link active">الرئيسية</a></li>
+                <li><a href="#services" class="modern-nav-link">خدماتنا</a></li>
+                <li><a href="#about" class="modern-nav-link">من نحن</a></li>
+                <li><a href="#team" class="modern-nav-link">الفريق</a></li>
+                <li><a href="#contact" class="modern-nav-link">تواصل معنا</a></li>
+            </ul>
+
+            <div class="nav-auth">
+                <!-- Portal Link for Lawyers only -->
+                <a href="#lawyer-portal" class="modern-nav-cta">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path>
+                        <polyline points="10 17 15 12 10 7"></polyline>
+                        <line x1="15" y1="12" x2="3" y2="12"></line>
+                    </svg>
+                    <span>بوابة الإدارة</span>
+                </a>
+            </div>
+
+            <button class="modern-mobile-menu-btn" id="mobileMenuBtn">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Floating Buttons -->
+    <div
+        style="position: fixed; bottom: 2rem; right: 2rem; display: flex; flex-direction: column; gap: 1rem; z-index: 1000;">
+        <button id="themeToggle" class="modern-btn modern-btn-secondary"
+            style="width: 50px; height: 50px; border-radius: 50%; padding: 0;">🌙</button>
+        <button id="langToggle" class="modern-btn modern-btn-secondary"
+            style="width: 50px; height: 50px; border-radius: 50%; padding: 0;">🇬🇧</button>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="modern-hero" id="home">
+        <div class="modern-container" style="text-align: center;">
+            <div class="hero-content animate-fade-in">
+                <div class="modern-section-badge">
+                    <span>⚖️ مكتب محمد غازي الجدعي للمحاماة</span>
+                </div>
+
+                <h1 class="hero-title">
+                    <span class="gradient-text">خدمات قانونية احترافية</span>
+                    بخبرة ومهنية عالية
+                </h1>
+
+                <p class="hero-description">نقدم استشارات ومرافعات قانونية متخصصة في جميع المجالات مع فريق من المحامين
+                    ذوي الخبرة الواسعة.</p>
+
+                <div class="hero-buttons">
+                    <a href="#contact" class="modern-btn modern-btn-primary">احجز استشارتك الآن</a>
+                    <a href="#track-case" class="modern-btn modern-btn-secondary">🔍 تتبع قضيتك</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Detailed Services -->
+    <section id="services" class="modern-services">
+        <div class="modern-container">
+            <div class="modern-section-header">
+                <div class="modern-section-badge">⚖️ خدماتنا القانونية</div>
+                <h2 class="modern-section-title">نقدم حلولاً قانونية شاملة لجميع احتياجاتك</h2>
+                <p class="modern-section-subtitle">فريق متخصص لتقديم الدعم القانوني في مختلف المجالات</p>
+            </div>
+
+            <div class="modern-grid modern-grid-4">
+                <div class="service-card-modern animate-scale-in">
+                    <div class="service-icon-modern">⚖️</div>
+                    <h3>القضايا المدنية</h3>
+                    <p>المرافعات والدعاوى المدنية بكافة أنواعها مع ضمان أفضل النتائج.</p>
+                </div>
+                <div class="service-card-modern animate-scale-in" style="animation-delay: 0.1s">
+                    <div class="service-icon-modern">👪</div>
+                    <h3>الأحوال الشخصية</h3>
+                    <p>الطلاق، الحضانة، النفقة والميراث بحساسية ومهنية تامة.</p>
+                </div>
+                <div class="service-card-modern animate-scale-in" style="animation-delay: 0.2s">
+                    <div class="service-icon-modern">🏢</div>
+                    <h3>القضايا التجارية</h3>
+                    <p>النزاعات التجارية والعقود والشركات بخبرة قانونية واسعة.</p>
+                </div>
+                <div class="service-card-modern animate-scale-in" style="animation-delay: 0.3s">
+                    <div class="service-icon-modern">🏛️</div>
+                    <h3>القضايا الجنائية</h3>
+                    <p>الدفاع القوي والحضور في القضايا الجنائية المعقدة.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" style="padding: 100px 0; background: white;">
+        <div class="modern-container">
+            <div class="modern-grid modern-grid-2" style="align-items: center;">
+                <div class="animate-slide-in">
+                    <div class="modern-section-badge">من نحن</div>
+                    <h2 class="modern-section-title"
+                        style="text-align: right; -webkit-text-fill-color: initial; background: none;">لماذا تختار مكتب
+                        محمد غازي الجدعي؟</h2>
+                    <p style="font-size: 1.2rem; line-height: 1.8; color: var(--slate-600); margin-bottom: 2rem;">مكتب
+                        مترسخ في القواعد القانونية، يجمع بين الخبرة العريقة والتكنولوجيا الحديثة لخدمة الموكلين.</p>
+                    <div class="modern-grid modern-grid-2">
+                        <div class="stat-card">
+                            <div class="stat-number">500+</div>
+                            <div class="stat-label">قضية ناجحة</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">15+</div>
+                            <div class="stat-label">سنة خبرة</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="animate-fade-in" style="text-align: center;">
+                    <div style="font-size: 15rem; color: var(--gold-100);">⚖️</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section id="team" class="modern-services">
+        <div class="modern-container">
+            <div class="modern-section-header">
+                <h2 class="modern-section-title">نخبة من المحامين</h2>
+                <p class="modern-section-subtitle">فريق العمل المتخصص في خدمتك</p>
+            </div>
+            <div class="modern-grid modern-grid-3">
+                <div class="stat-card animate-scale-in">
+                    <div style="font-size: 5rem; margin-bottom: 1.5rem;">👨‍💼</div>
+                    <h3 class="ar-text">محمد غازي الجدعي</h3>
+                    <h3 class="en-text" style="display: none;">Mohammed Ghazi Al-Jad'i</h3>
+                    <p class="ar-text">محامي</p>
+                    <p class="en-text" style="display: none;">Lawyer</p>
+                </div>
+                <div class="stat-card animate-scale-in" style="animation-delay: 0.1s">
+                    <div style="font-size: 5rem; margin-bottom: 1.5rem;">👨‍💼</div>
+                    <h3 class="ar-text">حمام حكيم</h3>
+                    <h3 class="en-text" style="display: none;">Hammam Hakim</h3>
+                    <p class="ar-text">محامي</p>
+                    <p class="en-text" style="display: none;">Lawyer</p>
+                </div>
+                <div class="stat-card animate-scale-in" style="animation-delay: 0.2s">
+                    <div style="font-size: 5rem; margin-bottom: 1.5rem;">👨‍💼</div>
+                    <h3 class="ar-text">أشرف توفيق</h3>
+                    <h3 class="en-text" style="display: none;">Ashraf Tawfiq</h3>
+                    <p class="ar-text">محامي</p>
+                    <p class="en-text" style="display: none;">Lawyer</p>
+                </div>
+                <div class="stat-card animate-scale-in" style="animation-delay: 0.3s">
+                    <div style="font-size: 5rem; margin-bottom: 1.5rem;">👨‍💼</div>
+                    <h3 class="ar-text">تامر</h3>
+                    <h3 class="en-text" style="display: none;">Tamer</h3>
+                    <p class="ar-text">محامي</p>
+                    <p class="en-text" style="display: none;">Lawyer</p>
+                </div>
+                <div class="stat-card animate-scale-in" style="animation-delay: 0.4s">
+                    <div style="font-size: 5rem; margin-bottom: 1.5rem;">👨‍💼</div>
+                    <h3 class="ar-text">جوزيف بطرس</h3>
+                    <h3 class="en-text" style="display: none;">Joseph Botros</h3>
+                    <p class="ar-text">محامي</p>
+                    <p class="en-text" style="display: none;">Lawyer</p>
+                </div>
+                <div class="stat-card animate-scale-in" style="animation-delay: 0.5s">
+                    <div style="font-size: 5rem; margin-bottom: 1.5rem;">👨‍💼</div>
+                    <h3 class="ar-text">ميشيل بطرس</h3>
+                    <h3 class="en-text" style="display: none;">Michel Botros</h3>
+                    <p class="ar-text">محامي</p>
+                    <p class="en-text" style="display: none;">Lawyer</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Form -->
+    <section id="contact" style="padding: 100px 0; background: white;">
+        <div class="modern-container">
+            <div class="modern-section-header">
+                <h2 class="modern-section-title">أرسل طلبك القانوني</h2>
+                <p class="modern-section-subtitle">أدخل بياناتك وتفاصيل الطلب وسنقوم بالرد فورا</p>
+            </div>
+            <div class="glass-card animate-fade-in" style="max-width: 850px; margin: 0 auto; padding: 3.5rem;">
+                <form id="contactForm">
+                    <div class="modern-grid modern-grid-2">
+                        <div class="form-group" style="grid-column: span 2;">
+                            <label>نوع الخدمة المطلوبة</label>
+                            <select id="serviceType" name="serviceType" required>
+                                <option value="">اختر نوع الخدمة</option>
+                                <option value="case">رفع قضية جديدة</option>
+                                <option value="consultation">استشارة قانونية</option>
+                                <option value="followup">متابعة / استفسار</option>
+                            </select>
+                        </div>
+                        <div id="caseTypeGroup" class="form-group" style="grid-column: span 2; display: none;">
+                            <label class="ar-text">نوع القضية *</label>
+                            <label class="en-text" style="display: none;">Case Type *</label>
+                            <select id="caseType" name="caseType">
+                                <option value="">اختر نوع القضية</option>
+                                <option value="مدني">مدني</option>
+                                <option value="أحوال شخصية">أحوال شخصية</option>
+                                <option value="تجاري">تجاري</option>
+                                <option value="جنائي">جنائي</option>
+                                <option value="عمالي">عمالي</option>
+                                <option value="قضاء إداري">قضاء إداري</option>
+                                <option value="أخرى">أخرى</option>
+                            </select>
+                        </div>
+                        <div id="lawyerSelectGroup" class="form-group" style="grid-column: span 2; display: none;">
+                            <label class="ar-text">اختر المحامي المطلوب *</label>
+                            <label class="en-text" style="display: none;">Select Required Lawyer *</label>
+                            <select id="assignedLawyer" name="assignedLawyer">
+                                <option value="" data-ar="-- اختر محامي --" data-en="-- Select Lawyer --">-- اختر محامي
+                                    --</option>
+                                <option value="mohammed@aljadei-law.com" data-ar="محمد غازي الجدعي"
+                                    data-en="Mohammed Ghazi Al-Jad'i">محمد غازي الجدعي</option>
+                                <option value="hammam@aljadei-law.com" data-ar="حمام حكيم" data-en="Hammam Hakim">حمام
+                                    حكيم</option>
+                                <option value="ashraf@aljadei-law.com" data-ar="أشرف توفيق" data-en="Ashraf Tawfiq">أشرف
+                                    توفيق</option>
+                                <option value="tamer@aljadei-law.com" data-ar="تامر" data-en="Tamer">تامر</option>
+                                <option value="joseph@aljadei-law.com" data-ar="جوزيف بطرس" data-en="Joseph Botros">
+                                    جوزيف بطرس</option>
+                                <option value="michel@aljadei-law.com" data-ar="ميشيل بطرس" data-en="Michel Botros">
+                                    ميشيل بطرس</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="ar-text">الاسم الكامل *</label>
+                            <label class="en-text" style="display: none;">Full Name *</label>
+                            <input type="text" id="name" name="name" required placeholder-ar="أدخل اسمك الثلاثي"
+                                placeholder-en="Enter your full name">
+                        </div>
+                        <div class="form-group">
+                            <label class="ar-text">رقم الهاتف *</label>
+                            <label class="en-text" style="display: none;">Phone Number *</label>
+                            <input type="tel" id="phone" name="phone" required placeholder="01XXXXXXXXX">
+                        </div>
+                        <div class="form-group">
+                            <label class="ar-text">الرقم المدني *</label>
+                            <label class="en-text" style="display: none;">National ID *</label>
+                            <input type="text" id="nationalId" name="nationalId" required
+                                placeholder-ar="أدخل الرقم المدني" placeholder-en="Enter National ID">
+                        </div>
+                        <div class="form-group">
+                            <label class="ar-text">البريد الإلكتروني *</label>
+                            <label class="en-text" style="display: none;">Email Address *</label>
+                            <input type="email" id="email" name="email" required placeholder="example@email.com">
+                        </div>
+                        <div class="form-group" style="grid-column: span 2;">
+                            <label>تفاصيل الموضوع</label>
+                            <textarea id="caseDetails" name="caseDetails" rows="5" required
+                                placeholder="اشرح لنا تفاصيل قضيتك أو استفسارك..."></textarea>
+                        </div>
+
+                        <div style="grid-column: span 2; margin-top: 1rem;">
+                            <button type="submit" class="modern-btn modern-btn-primary"
+                                style="width: 100%; border-radius: 12px; font-size: 1.1rem; padding: 1rem;">إرسال الطلب
+                                الآن</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Case Tracking -->
+    <section id="track-case" class="modern-services">
+        <div class="modern-container">
+            <div class="modern-section-header">
+                <h2 class="modern-section-title">متابعة حالة القضية</h2>
+            </div>
+            <div class="glass-card animate-fade-in"
+                style="max-width: 550px; margin: 0 auto 3rem; padding: 3rem; text-align: center;">
+                <form id="caseSearchForm">
+                    <div class="form-group" style="margin-bottom: 2rem;">
+                        <label>رقم القضية</label>
+                        <input type="text" id="caseNumber" required placeholder="مثال: LO-2026-XXXXX">
+                    </div>
+                    <div class="form-group" style="margin-bottom: 2rem;">
+                        <label>الرقم المدني للموكل</label>
+                        <input type="text" id="trackNationalId" required placeholder="أدخل الرقم المدني">
+                    </div>
+                    <button type="submit" class="modern-btn modern-btn-secondary"
+                        style="width: 100%; padding: 1rem;">بحث عن القضية</button>
+                </form>
+            </div>
+
+            <!-- Case Research Result (Secret Page/Section) -->
+            <div id="caseResults" class="animate-fade-in" style="display: none; max-width: 900px; margin: 0 auto;">
+                <div class="glass-card"
+                    style="padding: 3.5rem; border-radius: 30px; position: relative; overflow: hidden;">
+                    <div
+                        style="position: absolute; top: 0; left: 0; right: 0; height: 10px; background: var(--gradient-accent);">
+                    </div>
+
+                    <div
+                        style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 3rem;">
+                        <h2 style="font-size: 1.8rem; color: var(--slate-900);">📋 بيانات القضية التفصيلية</h2>
+                        <button onclick="document.getElementById('caseResults').style.display='none'" class="modern-btn"
+                            style="padding: 0.5rem 1rem; background: var(--slate-100); border-radius: 10px;">إغلاق</button>
+                    </div>
+
+                    <div class="modern-grid modern-grid-3" style="gap: 2rem; text-align: right;">
+                        <div class="modern-grid modern-grid-3" style="gap: 2rem; text-align: right;">
+                            <div class="result-item"
+                                style="background: rgba(212, 175, 55, 0.1); padding: 1.5rem; border-radius: 15px; border: 1px solid var(--gold-400);">
+                                <label
+                                    style="display: block; color: var(--gold-700); font-weight: 800; font-size: 0.9rem; margin-bottom: 0.5rem;">رقم
+                                    القضية (للمتابعة)</label>
+                                <div id="resSystemCaseNumber"
+                                    style="font-weight: 900; font-size: 1.5rem; color: var(--gold-600); letter-spacing: 1px;">
+                                    ---</div>
+                            </div>
+                            <div class="result-item">
+                                <label
+                                    style="display: block; color: var(--slate-500); font-size: 0.9rem; margin-bottom: 0.5rem;">اسم
+                                    الموكل</label>
+                                <div id="resClientName"
+                                    style="font-weight: 700; font-size: 1.2rem; color: var(--slate-900);">---</div>
+                            </div>
+                            <div class="result-item">
+                                <label
+                                    style="display: block; color: var(--slate-500); font-size: 0.9rem; margin-bottom: 0.5rem;">الرقم
+                                    المدني</label>
+                                <div id="resNationalId" style="font-weight: 700; font-size: 1.2rem;">---</div>
+                            </div>
+                            <div class="result-item">
+                                <label
+                                    style="display: block; color: var(--slate-500); font-size: 0.9rem; margin-bottom: 0.5rem;">الخصم</label>
+                                <div id="resOpponent" style="font-weight: 700; font-size: 1.2rem; color: #ef4444;">---
+                                </div>
+                            </div>
+                            <div class="result-item">
+                                <label
+                                    style="display: block; color: var(--slate-500); font-size: 0.9rem; margin-bottom: 0.5rem;">الرقم
+                                    الآلي للقضية</label>
+                                <div id="resAutoId"
+                                    style="font-weight: 700; font-size: 1.2rem; color: var(--gold-600);">---
+                                </div>
+                            </div>
+                            <div class="result-item">
+                                <label
+                                    style="display: block; color: var(--slate-500); font-size: 0.9rem; margin-bottom: 0.5rem;">رقم
+                                    الدعوى</label>
+                                <div id="resLawsuitNum" style="font-weight: 700; font-size: 1.2rem;">---</div>
+                            </div>
+                            <div class="result-item">
+                                <label
+                                    style="display: block; color: var(--slate-500); font-size: 0.9rem; margin-bottom: 0.5rem;">نوع
+                                    الدعوى</label>
+                                <div id="resLawsuitType" style="font-weight: 700; font-size: 1.2rem;">---</div>
+                            </div>
+                            <div class="result-item">
+                                <label
+                                    style="display: block; color: var(--slate-500); font-size: 0.9rem; margin-bottom: 0.5rem;">تاريخ
+                                    الجلسة</label>
+                                <div id="resHearingDate"
+                                    style="font-weight: 700; font-size: 1.2rem; background: var(--gold-50); padding: 0.5rem 1rem; border-radius: 8px; display: inline-block; color: var(--gold-700);">
+                                    ---</div>
+                            </div>
+                            <div class="result-item" style="grid-column: span 2;">
+                                <label
+                                    style="display: block; color: var(--slate-500); font-size: 0.9rem; margin-bottom: 0.5rem;">ملاحظات
+                                    المحامي</label>
+                                <div id="resNotes"
+                                    style="line-height: 1.8; color: var(--slate-700); background: var(--slate-50); padding: 1.5rem; border-radius: 15px; border-right: 4px solid var(--gold-400);">
+                                    ---</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- No Results Message -->
+                <div id="noResults" class="animate-fade-in"
+                    style="display: none; text-align: center; color: #ef4444; margin-top: 2rem; font-weight: 600; padding: 1rem; border: 1px solid #ef4444; border-radius: 12px; background: rgba(239, 68, 68, 0.1);">
+                    ❌ عذراً، البيانات المدخلة غير صحيحة. يرجى التأكد من رقم القضية والرقم المدني وإعادة المحاولة.
+                </div>
+            </div>
+    </section>
+
+    <!-- Lawyer Portal Section -->
+    <section id="lawyer-portal" class="modern-services" style="background: var(--slate-900); padding: 100px 0;">
+        <div class="modern-container">
+            <div class="modern-section-header">
+                <div class="modern-section-badge" style="background: rgba(255,255,255,0.1); color: var(--gold-300);">🔐
+                    منطقة المحامين</div>
+                <h2 class="modern-section-title" style="color: white; -webkit-text-fill-color: initial;">بوابة إدارة
+                    القضايا</h2>
+            </div>
+
+            <!-- Login Area -->
+            <div id="loginArea" class="glass-card animate-fade-in"
+                style="max-width: 450px; margin: 0 auto; padding: 3rem; background: rgba(0,0,0,0.4); border-color: rgba(255,255,255,0.1);">
+                <form id="lawyerLoginForm">
+                    <div class="form-group" style="margin-bottom: 1.5rem;">
+                        <label class="ar-text" style="color: var(--slate-300);">البريد الإلكتروني المهني</label>
+                        <label class="en-text" style="display: none; color: var(--slate-300);">Professional
+                            Email</label>
+                        <input type="email" id="lawyerUser" required placeholder="example@aljadei-law.com"
+                            style="background: rgba(0,0,0,0.5); border-color: rgba(255,255,255,0.2); color: white;">
+                    </div>
+                    <div class="form-group" style="margin-bottom: 2rem;">
+                        <label class="ar-text" style="color: var(--slate-300);">كلمة المرور</label>
+                        <label class="en-text" style="display: none; color: var(--slate-300);">Password</label>
+                        <input type="password" id="lawyerPass" required placeholder="********"
+                            style="background: rgba(0,0,0,0.5); border-color: rgba(255,255,255,0.2); color: white;">
+                    </div>
+                    <button type="submit" class="modern-btn modern-btn-primary" style="width: 100%;">
+                        <span class="ar-text">تسجيل الدخول للنظام</span>
+                        <span class="en-text" style="display: none;">System Login</span>
+                    </button>
+                    <div id="loginError"
+                        style="color: #ef4444; margin-top: 1rem; text-align: center; font-size: 0.9rem;"></div>
+                </form>
+            </div>
+
+            <!-- Dashboard Area (Hidden by default) -->
+            <div id="dashboardArea" class="animate-fade-in" style="display: none;">
+                <div class="dashboard-header"
+                    style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; color: white;">
+                    <div>
+                        <h2 style="font-size: 1.5rem;">مرحباً، <span id="welcomeMsg"
+                                style="color: var(--gold-400);">---</span></h2>
+                        <p style="color: var(--slate-400);">لوحة تحكم إدارة القضايا</p>
+                    </div>
+                    <button id="logoutBtn" class="modern-btn modern-btn-secondary"
+                        style="background: rgba(255,255,255,0.1); color: white;">تسجيل الخروج</button>
+                </div>
+
+                <!-- Stats -->
+                <div class="modern-grid modern-grid-2" style="margin-bottom: 3rem;">
+                    <div class="stat-card"
+                        style="background: rgba(255,255,255,0.05); color: white; border-color: rgba(255,255,255,0.1);">
+                        <div class="stat-number" id="totalCases">0</div>
+                        <div class="stat-label" style="color: var(--slate-400);">إجمالي القضايا</div>
+                    </div>
+                    <div class="stat-card"
+                        style="background: rgba(255,255,255,0.05); color: white; border-color: rgba(255,255,255,0.1);">
+                        <div class="stat-number" id="activeCases" style="color: #10b981;">0</div>
+                        <div class="stat-label" style="color: var(--slate-400);">القضايا النشطة</div>
+                    </div>
+                </div>
+
+                <!-- Dashboard Filters -->
+                <div class="glass-card"
+                    style="padding: 1.5rem; margin-bottom: 2rem; background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.1);">
+                    <div class="modern-grid modern-grid-3" style="gap: 1rem;">
+                        <input type="text" id="filterSearch" placeholder="بحث باسم الموكل أو رقم القضية..."
+                            style="background: rgba(0,0,0,0.3); border-color: rgba(255,255,255,0.2); color: white;">
+
+                        <select id="filterStatus"
+                            style="background: rgba(0,0,0,0.3); border-color: rgba(255,255,255,0.2); color: white;">
+                            <option value="">كافة الحالات</option>
+                            <option value="قيد المراجعة">قيد المراجعة</option>
+                            <option value="بانتظار المستندات">بانتظار المستندات</option>
+                            <option value="تم قيد الدعوى">تم قيد الدعوى</option>
+                            <option value="قيد المرافعة">قيد المرافعة</option>
+                            <option value="محجوزة للحكم">محجوزة للحكم</option>
+                            <option value="مكتمل">مكتمل</option>
+                        </select>
+
+                        <select id="filterCaseType"
+                            style="background: rgba(0,0,0,0.3); border-color: rgba(255,255,255,0.2); color: white;">
+                            <option value="">كافة أنواع القضايا</option>
+                            <option value="مدني">مدني</option>
+                            <option value="أحوال شخصية">أحوال شخصية</option>
+                            <option value="تجاري">تجاري</option>
+                            <option value="جنائي">جنائي</option>
+                            <option value="عمالي">عمالي</option>
+                            <option value="قضاء إداري">قضاء إداري</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Table Container -->
+                <div class="glass-card"
+                    style="overflow-x: auto; background: rgba(0,0,0,0.2); border-color: rgba(255,255,255,0.1);">
+                    <table style="width: 100%; border-collapse: collapse; color: white;">
+                        <thead>
+                            <tr style="background: rgba(255,255,255,0.05); text-align: right;">
+                                <th style="padding: 1.5rem;">رقم القضية</th>
+                                <th style="padding: 1.5rem;">اسم الموكل</th>
+                                <th style="padding: 1.5rem;">المحامي المسؤول</th>
+                                <th style="padding: 1.5rem;">الرقم المدني</th>
+                                <th style="padding: 1.5rem;">الحالة</th>
+                                <th style="padding: 1.5rem;">آخر تحديث</th>
+                                <th style="padding: 1.5rem;">الإجراءات</th>
+                            </tr>
+                        </thead>
+                        <tbody id="dashboardTableBody">
+                            <!-- Data will be injected here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+
+    <!-- Lawyer Dashboard Edit Modal -->
+    <div id="lawyerUpdateModal" class="modal-overlay"
+        style="display: none; background: rgba(0,0,0,0.8); z-index: 2100;">
+        <div class="modal-content glass-card"
+            style="max-width: 700px; padding: 3rem; text-align: right; background: var(--slate-900); border: 2px solid var(--gold-500);">
+            <h2 style="color: var(--gold-400); margin-bottom: 2rem; display: flex; align-items: center; gap: 1rem;">⚖️
+                تحديث بيانات القضية</h2>
+
+
+
+
+
+            <form id="lawyerUpdateForm">
+                <input type="hidden" id="editDocId">
+
+                <!-- Tab: General Info -->
+                <div id="modalTab-general">
+                    <div class="modern-grid modern-grid-2" style="gap: 1.5rem;">
+                        <div class="form-group">
+                            <label style="color: var(--slate-300);">حالة القضية</label>
+                            <select id="editStatus"
+                                style="background: rgba(0,0,0,0.3); color: white; border-color: var(--slate-700);">
+                                <option value="قيد المراجعة">قيد المراجعة</option>
+                                <option value="بانتظار المستندات">بانتظار المستندات</option>
+                                <option value="تم قيد الدعوى">تم قيد الدعوى</option>
+                                <option value="قيد المرافعة">قيد المرافعة</option>
+                                <option value="محجوزة للحكم">محجوزة للحكم</option>
+                                <option value="مكتمل">مكتمل</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label style="color: var(--slate-300);">الخصم</label>
+                            <input type="text" id="editOpponent" placeholder="اسم الخصم">
+                        </div>
+                        <div class="form-group">
+                            <label style="color: var(--slate-300);">الرقم الآلي للقضية</label>
+                            <input type="text" id="editAutoId" placeholder="الرقم الآلي">
+                        </div>
+                        <div class="form-group">
+                            <label style="color: var(--slate-300);">رقم هاتف الموكل</label>
+                            <input type="tel" id="editClientPhone" placeholder="01XXXXXXXXX">
+                        </div>
+                        <div class="form-group">
+                            <label style="color: var(--slate-300);">نوع القضية</label>
+                            <select id="editCaseType"
+                                style="background: rgba(0,0,0,0.3); color: white; border-color: var(--slate-700);">
+                                <option value="">اختر نوع القضية</option>
+                                <option value="مدني">مدني</option>
+                                <option value="أحوال شخصية">أحوال شخصية</option>
+                                <option value="تجاري">تجاري</option>
+                                <option value="جنائي">جنائي</option>
+                                <option value="عمالي">عمالي</option>
+                                <option value="قضاء إداري">قضاء إداري</option>
+                                <option value="أخرى">أخرى</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label style="color: var(--slate-300);">رقم الدعوى</label>
+                            <input type="text" id="editLawsuitNum" placeholder="رقم الدعوى">
+                        </div>
+                        <div class="form-group">
+                            <label style="color: var(--slate-300);">نوع الدعوى</label>
+                            <input type="text" id="editLawsuitType" placeholder="نوع الدعوى">
+                        </div>
+                        <div class="form-group">
+                            <label style="color: var(--slate-300);">تاريخ الجلسة</label>
+                            <input type="text" id="editHearingDate" placeholder="مثال: 2026/02/15 الساعة 9 ص">
+                        </div>
+                        <div class="form-group" style="grid-column: span 2;">
+                            <label style="color: var(--slate-300);">تفاصيل القضية (المرسلة من الموكل)</label>
+                            <textarea id="editNotes" rows="6" placeholder="تفاصيل القضية..."
+                                style="background: rgba(255,255,255,0.05); color: white;"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab: Internal Notes -->
+                <div id="modalTab-internal" style="display: none;">
+                    <div style="text-align: center; margin-bottom: 2rem;">
+                        <span style="font-size: 3rem;">🔒</span>
+                        <h3 style="color: var(--gold-400); margin-top: 1rem;">مساحة عمل المحامين</h3>
+                        <p style="color: var(--slate-400);">هذه الملاحظات خاصة ومؤمنة، لا تظهر للموكل نهائياً.</p>
+                    </div>
+                    <div class="form-group">
+                        <label style="color: var(--slate-300);">الملاحظات الداخلية</label>
+                        <textarea id="editInternalNotes" rows="10"
+                            placeholder="اكتب هنا أي تفاصيل حساسة أو ملاحظات للفريق..."
+                            style="background: rgba(0,0,0,0.4); color: white; border-color: #f59e0b;"></textarea>
+                    </div>
+                </div>
+
+                <div style="display: flex; gap: 1rem; margin-top: 2.5rem;">
+                    <button type="submit" class="modern-btn modern-btn-primary" style="flex: 2;">حفظ التعديلات</button>
+                    <button type="button" onclick="document.getElementById('lawyerUpdateModal').style.display='none'"
+                        class="modern-btn" style="flex: 1; background: var(--slate-700); color: white;">إلغاء</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer
+        style="padding: 100px 0 40px; background: var(--slate-950); color: white; border-top: 1px solid rgba(255,255,255,0.05);">
+        <div class="modern-container">
+            <div class="modern-grid modern-grid-3">
+                <div>
+                    <h3 style="font-size: 1.8rem; margin-bottom: 1.5rem; color: var(--gold-400);">محمد غازي الجدعي</h3>
+                    <p style="color: var(--slate-400); line-height: 1.8;">نقدم خدمات قانونية متميزة تمزج بين الأصالة
+                        والحداثة، لتحقيق أفضل النتائج لموكلينا في كافة الأصعدة القانونية.</p>
+                </div>
+                <div>
+                    <h4 style="margin-bottom: 1.5rem; font-size: 1.2rem;">روابط سريعة</h4>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin-bottom: 1rem;"><a href="#home"
+                                style="color: var(--slate-300); text-decoration: none;">الرئيسية</a></li>
+                        <li style="margin-bottom: 1rem;"><a href="#services"
+                                style="color: var(--slate-300); text-decoration: none;">خدماتنا</a></li>
+                        <li style="margin-bottom: 1rem;"><a href="#contact"
+                                style="color: var(--slate-300); text-decoration: none;">تواصل معنا</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 style="margin-bottom: 1.5rem; font-size: 1.2rem;">اتصل بنا</h4>
+                    <p style="color: var(--slate-300); margin-bottom: 1rem;">📞 +20 123 456 7890</p>
+                    <p style="color: var(--slate-300); margin-bottom: 1rem;">📧 info@aljadei-law.com</p>
+                    <p style="color: var(--slate-300);">📍 القاهرة، جمهورية مصر العربية</p>
+                </div>
+            </div>
+            <div
+                style="text-align: center; margin-top: 60px; padding-top: 30px; border-top: 1px solid var(--slate-800); color: var(--slate-500); font-size: 0.9rem;">
+                © 2026 مكتب محمد غازي الجدعي للمحاماة. جميع الحقوق محفوظة.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Client Auth Removed -->
+
+    <!-- Success Modal -->
+
+    <!-- Success Modal -->
+    <div id="successModal" class="modal-overlay" style="display: none;">
+        <div class="modal-content glass-card"
+            style="max-width: 500px; text-align: center; padding: 4rem; border: 3px solid var(--gold-500);">
+            <div style="font-size: 5rem; color: #10b981; margin-bottom: 1.5rem;">✅</div>
+            <h2 class="ar-text" style="color: var(--slate-900); font-weight: 800; margin-bottom: 1rem;">تم الاستلام
+                بنجاح</h2>
+            <p class="ar-text" style="color: var(--slate-600); margin-bottom: 2rem;">يرجى تصوير الشاشة وحفظ رقم قضيتك
+                للمتابعة:</p>
+
+            <div id="modalCaseNumberDisplay"
+                style="font-size: 2.5rem; font-weight: 900; color: white; margin: 2rem 0; padding: 1.5rem; background: var(--slate-950); border-radius: 20px; border: 2px dashed var(--gold-400); letter-spacing: 2px; box-shadow: 0 10px 20px rgba(0,0,0,0.2);">
+                جاري التوليد...
+            </div>
+
+            <button id="closeModalBtn" class="modern-btn modern-btn-primary"
+                style="width: 100%; height: 60px; font-size: 1.2rem;">فهمت، إغلاق</button>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        // ========================================
+        // UI CORE LOGIC (Standard Script for Local File Support)
+        // ========================================
+
+        // 1. Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const htmlElement = document.documentElement;
+
+        function setTheme(theme) {
+            htmlElement.setAttribute('data-theme', theme);
+            themeToggle.innerText = theme === 'dark' ? '☀️' : '🌙';
+            localStorage.setItem('preferredTheme', theme);
+        }
+
+        themeToggle.onclick = () => {
+            const current = htmlElement.getAttribute('data-theme') || 'light';
+            setTheme(current === 'light' ? 'dark' : 'light');
+        };
+
+        // 2. Language Toggle
+        const langToggle = document.getElementById('langToggle');
+        function setLanguage(lang) {
+            htmlElement.setAttribute('lang', lang);
+            htmlElement.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
+            langToggle.innerText = lang === 'ar' ? '🇬🇧' : '🇪🇬';
+
+            // Show/Hide Elements
+            document.querySelectorAll('.ar-text').forEach(el => el.style.display = lang === 'ar' ? '' : 'none');
+            document.querySelectorAll('.en-text').forEach(el => el.style.display = lang === 'en' ? '' : 'none');
+
+            // Update Placeholders
+            document.querySelectorAll('[placeholder-ar]').forEach(input => {
+                input.placeholder = lang === 'ar' ? input.getAttribute('placeholder-ar') : input.getAttribute('placeholder-en');
+            });
+
+            // Update Translator-ready Options
+            document.querySelectorAll('option[data-ar]').forEach(opt => {
+                opt.text = lang === 'ar' ? opt.getAttribute('data-ar') : opt.getAttribute('data-en');
+            });
+
+            localStorage.setItem('preferredLanguage', lang);
+        }
+
+        langToggle.onclick = () => {
+            const current = htmlElement.getAttribute('lang') || 'ar';
+            setLanguage(current === 'ar' ? 'en' : 'ar');
+        };
+
+        // 3. Dropdown Logic (Lawyer Selection)
+        const serviceTypeSelect = document.getElementById('serviceType');
+        const lawyerSelectGroup = document.getElementById('lawyerSelectGroup');
+        const assignedLawyerSelect = document.getElementById('assignedLawyer');
+        const caseTypeGroup = document.getElementById('caseTypeGroup');
+        const caseTypeSelect = document.getElementById('caseType');
+
+        function updateFormVisibility() {
+            if (!serviceTypeSelect) return;
+
+            if (serviceTypeSelect.value === 'case') {
+                if (lawyerSelectGroup) lawyerSelectGroup.style.display = 'block';
+                if (assignedLawyerSelect) assignedLawyerSelect.setAttribute('required', 'required');
+
+                if (caseTypeGroup) caseTypeGroup.style.display = 'block';
+                if (caseTypeSelect) caseTypeSelect.setAttribute('required', 'required');
+            } else {
+                if (lawyerSelectGroup) lawyerSelectGroup.style.display = 'none';
+                if (assignedLawyerSelect) {
+                    assignedLawyerSelect.removeAttribute('required');
+                    assignedLawyerSelect.value = '';
+                }
+
+                if (caseTypeGroup) caseTypeGroup.style.display = 'none';
+                if (caseTypeSelect) {
+                    caseTypeSelect.removeAttribute('required');
+                    caseTypeSelect.value = '';
+                }
+            }
+        }
+
+        if (serviceTypeSelect) {
+            serviceTypeSelect.addEventListener('change', updateFormVisibility);
+        }
+
+        // 4. Modal Interactions
+        const successModal = document.getElementById('successModal');
+        document.getElementById('closeModalBtn').onclick = () => successModal.style.display = 'none';
+
+        window.onclick = (e) => {
+            if (e.target == successModal) successModal.style.display = 'none';
+        }
+
+        // Initialize state from storage or defaults
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('preferredTheme') || 'light';
+            const savedLang = localStorage.getItem('preferredLanguage') || 'ar';
+            setTheme(savedTheme);
+            setLanguage(savedLang);
+            updateFormVisibility();
+        });
+
+        // 5. Modal Tab Switching
+        function switchModalTab(tabName) {
+            // Hide all tabs
+            document.getElementById('modalTab-general').style.display = 'none';
+            document.getElementById('modalTab-internal').style.display = 'none';
+
+            // Show selected tab
+            document.getElementById('modalTab-' + tabName).style.display = 'block';
+        }
+
+    </script>
+    <script type="module" src="script.js"></script>
+</body>
+
+</html>

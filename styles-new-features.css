@@ -1,0 +1,202 @@
+/* ========================================
+   CSS Variables & Design Tokens
+   ======================================== */
+:root {
+    /* Navy Blue Palette */
+    --navy-dark: #0a1929;
+    --navy-medium: #1a2942;
+    --navy-light: #2d3f5f;
+    --navy-lighter: #3d5170;
+
+    /* Gold Palette */
+    --gold-dark: #b8941f;
+    --gold-primary: #d4af37;
+    --gold-light: #f5d88a;
+    --gold-lighter: #fef3d6;
+
+    /* Neutral Colors - Light Mode */
+    --white: #ffffff;
+    --gray-light: #f5f7fa;
+    --gray-medium: #e0e5ec;
+    --gray-dark: #6b7280;
+
+    /* Theme Colors (Light Mode Default) */
+    --bg-primary: #ffffff;
+    --bg-secondary: #f5f7fa;
+    --bg-tertiary: #e0e5ec;
+    --text-primary: #0a1929;
+    --text-secondary: #2d3f5f;
+    --text-muted: #6b7280;
+    --border-color: #e0e5ec;
+
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy-medium) 100%);
+    --gradient-gold: linear-gradient(135deg, var(--gold-dark) 0%, var(--gold-primary) 60%, var(--gold-light) 100%);
+    --gradient-overlay: linear-gradient(135deg, rgba(10, 25, 41, 0.95) 0%, rgba(29, 47, 66, 0.85) 100%);
+
+    /* Typography */
+    --font-arabic: 'Cairo', 'Tajawal', sans-serif;
+    --font-english-heading: 'Cormorant Garamond', serif;
+    --font-english-body: 'Inter', sans-serif;
+
+    /* Spacing */
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 2rem;
+    --spacing-lg: 4rem;
+    --spacing-xl: 6rem;
+
+    /* Transitions */
+    --transition-fast: 0.2s ease;
+    --transition-normal: 0.3s ease;
+    --transition-slow: 0.5s ease;
+
+    /* Shadows - Light Mode */
+    --shadow-sm: 0 2px 8px rgba(10, 25, 41, 0.1);
+    --shadow-md: 0 4px 16px rgba(10, 25, 41, 0.15);
+    --shadow-lg: 0 8px 32px rgba(10, 25, 41, 0.2);
+    --shadow-gold: 0 4px 20px rgba(212, 175, 55, 0.3);
+}
+
+/* Dark Mode Theme */
+[data-theme="dark"] {
+    /* Dark Mode Backgrounds */
+    --bg-primary: #0d1117;
+    --bg-secondary: #161b22;
+    --bg-tertiary: #21262d;
+
+    /* Dark Mode Text Colors */
+    --text-primary: #f0f6fc;
+    --text-secondary: #c9d1d9;
+    --text-muted: #8b949e;
+
+    /* Dark Mode Borders */
+    --border-color: #30363d;
+
+    /* Dark Mode Shadows */
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.5);
+    --shadow-gold: 0 4px 20px rgba(212, 175, 55, 0.4);
+}
+
+/* ========================================
+   Reset & Base Styles
+   ======================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+}
+
+body {
+    font-family: var(--font-arabic);
+    line-height: 1.7;
+    color: var(--text-primary);
+    background-color: var(--bg-primary);
+    overflow-x: hidden;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Arabic text styling */
+[lang="ar"] .ar-text,
+[lang="ar"] body {
+    font-family: var(--font-arabic);
+}
+
+/* English text styling */
+[lang="en"] .en-text,
+[lang="en"] body {
+    font-family: var(--font-english-body);
+}
+
+[lang="en"] h1,
+[lang="en"] h2,
+[lang="en"] h3 {
+    font-family: var(--font-english-heading);
+}
+
+/* ========================================
+   Theme & Language Switchers
+   ======================================== */
+.theme-language-controls {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1000;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+[dir="rtl"] .theme-language-controls {
+    left: auto;
+    right: 20px;
+}
+
+/* Theme Toggle Button */
+.theme-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    background: var(--bg-primary);
+    backdrop-filter: blur(10px);
+    border: 2px solid var(--gold-primary);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all var(--transition-normal);
+    box-shadow: var(--shadow-md);
+}
+
+.theme-btn:hover {
+    background: var(--gold-primary);
+    transform: translateY(-2px) rotate(15deg);
+    box-shadow: var(--shadow-gold);
+}
+
+.theme-icon {
+    font-size: 22px;
+    transition: transform var(--transition-normal);
+}
+
+.theme-btn:hover .theme-icon {
+    transform: scale(1.1);
+}
+
+/* Language Switcher Button */
+.lang-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--bg-primary);
+    backdrop-filter: blur(10px);
+    border: 2px solid var(--gold-primary);
+    padding: 10px 20px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+    transition: all var(--transition-normal);
+    box-shadow: var(--shadow-md);
+}
+
+.lang-btn:hover {
+    background: var(--gold-primary);
+    color: var(--white);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-gold);
+}
+
+.lang-icon {
+    font-size: 18px;
+}
+
+/* Note: The full existing CSS continues here - I'm appending new styles at the end */

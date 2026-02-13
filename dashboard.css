@@ -1,0 +1,177 @@
+/* Dashboard & Lawyer Login Styles */
+.lawyer-access {
+    padding: 100px 0;
+    background: var(--bg-secondary);
+}
+
+.login-wrapper {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 2rem;
+    background: var(--bg-primary);
+    border-radius: 20px;
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--border-color);
+}
+
+.login-form .form-group {
+    margin-bottom: 1.5rem;
+}
+
+.login-form label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.login-form input {
+    width: 100%;
+    padding: 0.8rem;
+    border: 2px solid var(--border-color);
+    border-radius: 10px;
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    transition: 0.3s;
+}
+
+.login-form input:focus {
+    border-color: var(--gold-primary);
+    outline: none;
+}
+
+.error-msg {
+    color: #ff4d4d;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+/* Dashboard Area */
+.dashboard-area {
+    background: var(--bg-primary);
+    padding: 2rem;
+    border-radius: 25px;
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--border-color);
+}
+
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+}
+
+.stat-card {
+    padding: 1.5rem;
+    background: var(--gradient-gold);
+    color: var(--navy-dark);
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: var(--shadow-md);
+}
+
+.stat-label {
+    display: block;
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+.stat-value {
+    font-size: 2rem;
+    font-weight: 900;
+}
+
+/* Table Design */
+.table-container {
+    overflow-x: auto;
+}
+
+.cases-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 800px;
+}
+
+.cases-table th {
+    text-align: right;
+    padding: 1rem;
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    font-weight: 700;
+}
+
+.cases-table td {
+    padding: 1rem;
+    border-bottom: 1px solid var(--border-color);
+    color: var(--text-primary);
+}
+
+.cases-table tr:hover {
+    background: rgba(0, 0, 0, 0.02);
+}
+
+.case-status-badge {
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.status-new {
+    background: var(--bg-tertiary);
+    color: #1976d2;
+    border: 1px solid #1976d2;
+}
+
+.status-active {
+    background: var(--bg-tertiary);
+    color: #f57c00;
+    border: 1px solid #f57c00;
+}
+
+.status-closed {
+    background: var(--bg-tertiary);
+    color: #388e3c;
+    border: 1px solid #388e3c;
+}
+
+[data-theme="light"] .status-new {
+    background: #e3f2fd;
+}
+
+[data-theme="light"] .status-active {
+    background: #fff3e0;
+}
+
+[data-theme="light"] .status-closed {
+    background: #e8f5e9;
+}
+
+.action-btn {
+    padding: 0.4rem 0.8rem;
+    border-radius: 8px;
+    border: none;
+    background: var(--gradient-gold);
+    color: var(--navy-dark);
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+@media (max-width: 768px) {
+    .dashboard-header {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+}

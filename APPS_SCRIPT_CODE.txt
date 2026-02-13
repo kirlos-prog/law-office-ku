@@ -1,0 +1,45 @@
+/**
+ * كود Google Apps Script لاستقبال طلبات القضايا من الموقع
+ * ====================================================
+ * الخطوات:
+ * 1. افتح صفحة Google Sheet التي تريد تجميع الطلبات فيها.
+ * 2. اضغط على Extensions > Apps Script.
+ * 3. امسح أي كود موجود، والصق هذا الكود مكانه.
+ * 4. اضغط Save (💾).
+ * 5. اضغط Deploy > New deployment.
+ * 6. اختر Type: Web app.
+ * 7. اجعل "Who has access" = "Anyone" (مهم جداً).
+ * 8. انسخ رابط "Web app URL" وأرسله لي.
+ */
+
+function doPost(e) {
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  
+  // التأكد من أن الصف الأول يحتوي على العناوين
+  // إذا كان الشيت فارغاً، سنضيف العناوين تلقائياً
+  if (sheet.getLastRow() === 0) {
+    sheet.appendRow(["التاريخ", "اسم الموكل", "الإيميل", "نوع الخدمة", "المحامي المختار", "تفاصيل القضية"]);
+  }
+  
+  // استلام البيانات من الموقع
+  var params = e.parameter;
+  
+  var date = new Date().toLocaleString(); // تاريخ وتوقيت الطلب
+  var name = params.clientName;
+  var email = params.clientEmail;
+  var service = params.serviceType;
+  var lawyer = params.selectedLawyer;
+  var details = params.caseDetails;
+  
+  // إضافة صف جديد في الشيت
+  sheet.appendRow([date, name, email, service, lawyer, details]);
+  
+  // الرد على الموقع بنجاح العملية
+  return ContentService.createTextOutput(JSON.stringify({"result":"success", "row": sheet.getLastRow()}))
+    .setMimeType(ContentService.MimeType.JSON);
+}
+
+// دالة للتجربة فقط
+function doGet(e) {
+  return ContentService.createTextOutput("Service is working!");
+}

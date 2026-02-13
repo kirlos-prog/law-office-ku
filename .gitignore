@@ -1,0 +1,15 @@
+# Firebase files
+.firebase/
+fire-debug.log
+firebase-debug.log*
+.firebaserc
+
+# App Script files
+APPS_SCRIPT_CODE.txt
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Documentation
+DEPLOY_GUIDE.md
