@@ -26,11 +26,13 @@ onAuthStateChanged(auth, (user) => {
     const loginArea = document.getElementById("loginArea");
     const dashboardArea = document.getElementById("dashboardArea");
     const welcomeMsg = document.getElementById("welcomeMsg");
+    const welcomeMsgEn = document.getElementById("welcomeMsgEn");
 
     if (user) {
         if (loginArea) loginArea.style.display = "none";
         if (dashboardArea) dashboardArea.style.display = "block";
         if (welcomeMsg) welcomeMsg.textContent = user.displayName || user.email;
+        if (welcomeMsgEn) welcomeMsgEn.textContent = user.displayName || user.email;
         loadLawyerDashboard(user);
     } else {
         if (loginArea) loginArea.style.display = "block";
